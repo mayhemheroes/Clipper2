@@ -44,8 +44,8 @@ target_include_directories(Clipper2
 
 if (MAYHEM)
   # Add fuzzer-no-link to compiler flags and linker flags
-  target_compile_options(Clipper2 PRIVATE -fsanitize=address,undefined,fuzzer-no-link)
-  target_link_options(Clipper2 PRIVATE -fsanitize=address,undefined,fuzzer-no-link)
+  target_compile_options(Clipper2 PRIVATE -fsanitize=undefined,fuzzer-no-link)
+  target_link_options(Clipper2 PRIVATE -fsanitize=undefined,fuzzer-no-link)
   add_subdirectory(mayhem)
 endif()
 
