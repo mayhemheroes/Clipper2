@@ -16,7 +16,6 @@ RUN make -j$(nproc)
 # Package Stage
 FROM --platform=linux/amd64 ubuntu:22.04
 COPY --from=builder /Clipper2/mayhem/fuzz_clipper /fuzz_clipper
-ex
 ## Set up fuzzing!
 ENTRYPOINT []
 CMD /fuzz_clipper

@@ -21,9 +21,9 @@ void fuzz_shape_creation(FuzzedDataProvider &fdp) {
 
 void fuzz_path_function(FuzzedDataProvider &fdp) {
     Paths64 subject, clip, solution;
-    FillRule fill_rule = static_cast<FillRule>(fdp.ConsumeIntegralInRange(0, max_fill_rule));
-    subject.push_back(MakePath(fdp.ConsumeRandomLengthString().c_str()));
-    clip.push_back(MakePath(fdp.ConsumeRandomLengthString().c_str()));
+    auto fill_rule = static_cast<FillRule>(fdp.ConsumeIntegralInRange(0, max_fill_rule));
+    subject.push_back(MakePath(fdp.ConsumeRandomLengthString()));
+    clip.push_back(MakePath(fdp.ConsumeRandomLengthString()));
 
     int fuzz_func = fdp.ConsumeIntegralInRange(0, 3);
 
@@ -37,14 +37,14 @@ void fuzz_path_function(FuzzedDataProvider &fdp) {
         case 2:
             Difference(subject, clip, fill_rule);
             break;
-        case 3:
+        default:
             Xor(subject, clip, fill_rule);
             break;
     }
 
 }
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t *data, std::size_t size) {
+extern "C" [[maybe_unused]] int LLVMFuzzerTestOneInput(const uint8_t *data, std::size_t size) {
     FuzzedDataProvider fdp(data, size);
     auto fuzz_shapes = fdp.ConsumeBool();
 
