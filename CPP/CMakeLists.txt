@@ -12,6 +12,7 @@ option(CLIPPER2_EXAMPLES "Build examples" ON)
 option(CLIPPER2_TESTS "Build tests" ON)
 option(USE_EXTERNAL_GTEST "Use system-wide installed GoogleTest" OFF)
 option(BUILD_SHARED_LIBS "Build shared libs" OFF)
+option(MAYHEM "Enable mayhem" OFF)
 
 include(GNUInstallDirs)
 
@@ -40,6 +41,13 @@ add_library(Clipper2 ${CLIPPER2_INC} ${CLIPPER2_SRC})
 target_include_directories(Clipper2
   PUBLIC Clipper2Lib/include
 )
+
+if (MAYHEM)
+  # Add fuzzer-no-link to compiler flags and linker flags
+  target_compile_options(Clipper2 PRIVATE -fsanitize=undefined,fuzzer-no-link)
+  target_link_options(Clipper2 PRIVATE -fsanitize=undefined,fuzzer-no-link)
+  add_subdirectory(mayhem)
+endif()
 
 # Clipper2 but with USINGZ defined
 add_library(Clipper2Z ${CLIPPER2_INC} ${CLIPPER2_SRC})

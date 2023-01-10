@@ -1,0 +1,6 @@
+project: Clipper2
+target: clipper-fuzz
+
+cmds:
+  - cmd: /fuzz_clipper
+    libfuzzer: true
