@@ -1,0 +1,4 @@
+project: mayhemheroes/Clipper2
+target: fuzz_clipper
+cmds:
+  - cmd: /fuzz_clipper @@
