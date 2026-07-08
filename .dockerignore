@@ -1,0 +1,15 @@
+# .dockerignore for the commit-image build.
+build/
+build-fuzz/
+build-tests/
+build-tests*/
+out/
+*.o
+*.a
+*.so
+*.dylib
+**/__pycache__/
+
+.DS_Store
+*.swp
+*~

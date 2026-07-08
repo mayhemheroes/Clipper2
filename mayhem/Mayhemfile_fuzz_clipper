@@ -1,0 +1,5 @@
+project: Clipper2
+target: fuzz_clipper
+cmds:
+  - cmd: /mayhem/fuzz_clipper
+    libfuzzer: true
